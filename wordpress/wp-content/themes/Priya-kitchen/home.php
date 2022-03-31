@@ -22,9 +22,7 @@ get_header();
 $args = array(
     'post_type' => 'post',
     'category_name' => 'chinese',
-    
-
-);
+    );
 
 $posts = new WP_Query($args);
 if($posts -> have_posts()) : ?>
@@ -82,6 +80,9 @@ $posts -> the_post(); ?>
 
             <div>
                 <h3 class = "category"><span>Main Course</span></h3>
+            </div>
+
+            <div>
             </div>
 
           <div class="container">
