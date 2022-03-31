@@ -42,22 +42,22 @@ $posts -> the_post(); ?>
       </div>
     
  
-<?php endwhile;
-endif;
-?>
-</div>
-</div>
-<div>
-    <h3 class = "category"><span>Latest Recipes</span></h3>
-</div>
-<div>
-    <?php
-$args = array(
-    'post_type' => 'post',
-    'category_name' => 'italian',
-    
+          <?php endwhile;
+          endif;
+          ?>
+          </div>
+          </div>
+          <div>
+              <h3 class = "category"><span>Latest Recipes</span></h3>
+          </div>
+          <div>
+              <?php
+          $args = array(
+              'post_type' => 'post',
+              'category_name' => 'italian',
+              
 
-);
+          );
 
 $posts = new WP_Query($args);
 if($posts -> have_posts()) : ?>
@@ -80,9 +80,9 @@ $posts -> the_post(); ?>
           ?>
           </div>
 
-          <div>
-              <h3 class = "category"><span>Main Course</span></h3>
-          </div>
+            <div>
+                <h3 class = "category"><span>Main Course</span></h3>
+            </div>
 
           <div class="container">
             <div class="row">
