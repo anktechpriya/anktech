@@ -39,7 +39,3 @@ endif;
 get_footer();
 
 ?> 
- 
- 
- 
- 

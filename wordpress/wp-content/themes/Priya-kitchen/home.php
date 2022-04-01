@@ -82,9 +82,6 @@ $posts -> the_post(); ?>
                 <h3 class = "category"><span>Main Course</span></h3>
             </div>
 
-            <div>
-            </div>
-
           <div class="container">
             <div class="row">
             <?php
