@@ -1,6 +1,7 @@
 <?php
 /* Template Name: Home
 */
+get_header();
 ?>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +13,7 @@
   
   .carousel-inner img {
     width: 100%;
-    height: 800px;
+    height: 400px;
   }
 
   .category{
@@ -25,17 +26,12 @@
     text-align: center;
     padding-top: 35px;
   }
-  img {
-    vertical-align: middle;
-    border-style: none;
-    height: 300px;
-    width: 270px;
-}
-.thumbnail img {
-    vertical-align: middle;
-    border-style: none;
-    height: 423px;
-    width: 367px;
+
+img {
+  
+    
+    height: 312px;
+    width: 277px;
 }
 a.more-link, .more-from-category a {
     color: #222;
@@ -45,20 +41,37 @@ a.more-link, .more-from-category a {
     padding: 5px 20px;
     text-transform: uppercase;
 }
-.labeling{
-  margin-top: 150px;
+.caption{
+  text-align: center;
 }
-.form-control {
-    display: block;
-    padding-left: 480px;
-    font-weight: 400;
-    margin-left:20px;
-    margin-right: 20px;
+
+
+ul.post-meta {
+    list-style: none;
 }
+
+li.menu-item {
+    padding: 0 12px;
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+    background-color: transparent;
+}
+
 </style>
 </head>
 <body>
 
+<!-- slider start -->
 <div id="demo" class="carousel slide" data-ride="carousel">
 
   <ul class="carousel-indicators">
@@ -86,11 +99,13 @@ a.more-link, .more-from-category a {
         <span class="carousel-control-next-icon"></span>
       </a>
 </div>
+<!-- slider start -->
 
     <div>
         <h3 class = "category">Browse by category</h3>
     </div>
 
+<!-- section for browse by category start -->
     <div class="container">
   <div class="row">
     <?php
@@ -113,17 +128,19 @@ a.more-link, .more-from-category a {
         </a>
       </div>
     </div>
-
+    
         <?php endwhile;
         endif; ?>
 
     </div>
 </div>
+<!-- section of browse by category ends -->
 
     <div>
         <h3 class = "category">Latest Recipes</h3>
     </div>
 
+<!-- section of latest recipes start -->    
     <div class="container">
   <div class="row">
     <?php
@@ -137,7 +154,7 @@ a.more-link, .more-from-category a {
         <?php while ($posts -> have_posts()) :
         $posts -> the_post(); ?>
 
-    <div class="col-md-4">
+    <div class="col-md-4 col-lg-4">
       <div class="thumbnail">
         <a href = "<?php echo get_the_permalink(get_the_ID()); ?>" > <?php the_post_thumbnail('thumbnail'); ?></a>
           <div class="caption">
@@ -151,42 +168,16 @@ a.more-link, .more-from-category a {
         endif; ?>
 
     </div>
-</div>
-
-      <div class= "container">
-        <div class="textwidget custom-html-widget">
-            <p class="more-from-category">
-                <a href="/blog/" title="Mains">View all recipes</a>
-            </p>
-        </div>
-      </div>
-
-      <div class="labeling">
-        <form name="registration_form" id='registration_form' class="form-inline">
-
-          <div class="form-group">
-              <label for="firstname" class="sr-only"></label>
-              <input id="firstname" class="form-control input-group-lg reg_name" type="text" name="firstname" title="Enter first name" placeholder="First name"/>
-          </div>
-
-          <div class="form-group">
-              <label for="email" class="sr-only"></label>
-              <input id="email" class="form-control input-group-lg" type="text" autocapitalize='off' name="email" title="Enter email" placeholder="Email Address"/>
-          </div>
-
-          <div class="form-group">
-              <input class="btn btn-primary" type="submit" value="Submit" class="form-control input-group-lg">
-          </div>
-        
-        </form>
-       </div>
+  </div>
+<!-- section of latest recipes end -->
 
        <div>
           <h3 class = "category">Main Course</h3>
        </div>
 
-       <div class="container">
-  <div class="row">
+<!-- section of main course start -->       
+      <div class="container">
+        <div class="row">
     <?php
     $args = array(
         'post_type' => 'post',
@@ -200,9 +191,13 @@ a.more-link, .more-from-category a {
 
     <div class="col-md-3">
       <div class="thumbnail">
+      
         <a href = "<?php echo get_the_permalink(get_the_ID()); ?>" > <?php the_post_thumbnail('thumbnail'); ?></a>
           <div class="caption">
             <h3> <a href = "<?php echo get_the_permalink(get_the_ID()); ?>" > <?php the_title(); ?></a></h3>
+        
+              <h6><?php the_meta(); ?></h6>
+        
           </div>
         </a>
       </div>
@@ -213,6 +208,7 @@ a.more-link, .more-from-category a {
 
     </div>
 </div>
+<!-- section of main course ends -->
 
       <div class= "container">
         <div class="textwidget custom-html-widget">
@@ -220,4 +216,8 @@ a.more-link, .more-from-category a {
                 <a href="/blog/" title="Mains">More from main course</a>
             </p>
         </div>
+      </div>
+
+        <div>
+      <?php get_footer(); ?>
       </div>
