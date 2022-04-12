@@ -7,4 +7,3 @@ function custom_theme_assets() {
 add_action( 'wp_enqueue_scripts', 'custom_theme_assets' );
 
 add_theme_support( 'post-thumbnails' );
-

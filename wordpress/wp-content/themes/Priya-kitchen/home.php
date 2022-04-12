@@ -221,4 +221,3 @@ a.more-link, .more-from-category a {
             </p>
         </div>
       </div>
-
