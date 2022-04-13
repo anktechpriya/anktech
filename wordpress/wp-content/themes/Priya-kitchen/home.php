@@ -33,7 +33,7 @@ get_header();
         <span class="carousel-control-next-icon"></span>
       </a>
 </div>
-<!-- slider start -->
+<!-- slider end -->
 
     <div>
         <h3 class = "category">Browse by category</h3>
@@ -41,34 +41,16 @@ get_header();
 
 <!-- section for browse by category start -->
     <div class="container">
-  <div class="row">
-    <?php
-$args = array(
-    'post_type' => 'post',
-    'category_name' => 'chinese',
-);
-
-$posts = new WP_Query($args);
-if ($posts->have_posts()): ?>
-        <?php while ($posts->have_posts()):
-        $posts->the_post(); ?>
-
-    <div class="col-md-3">
-      <div class="thumbnail">
-        <a href = "<?php echo get_the_permalink(get_the_ID()); ?>" > <?php the_post_thumbnail('thumbnail'); ?></a>
-          <div class="caption">
-            <h3> <a href = "<?php echo get_the_permalink(get_the_ID()); ?>" > <?php the_title(); ?></a></h3>
-          </div>
-        </a>
+      <div class="row">
+        <?php
+        $categories = get_categories();
+          foreach($categories as $category) {
+           echo '<div class="col-md-3"><a href="' . get_category_link($category->term_id) . '">' . $category->name . '</a></div>';
+          }
+        ?>
       </div>
     </div>
     
-        <?php
-    endwhile;
-endif; ?>
-
-    </div>
-</div>
 <!-- section of browse by category ends -->
 
     <div>
@@ -77,11 +59,10 @@ endif; ?>
 
 <!-- section of latest recipes start -->    
     <div class="container">
-  <div class="row">
-    <?php
-$args = array(
-    'post_type' => 'post',
-    'category_name' => 'latest',
+      <div class="row">
+       <?php
+       $args = array(
+      'category_name' => 'latest'
 );
 
 $posts = new WP_Query($args);
@@ -116,13 +97,12 @@ endif; ?>
         <div class="row">
     <?php
 $args = array(
-    'post_type' => 'post',
-    'category_name' => 'main',
+    'category_name' => 'main'
 );
 
 $posts = new WP_Query($args);
-if ($posts->have_posts()): ?>
-        <?php while ($posts->have_posts()):
+if ($posts->have_posts()): 
+         while ($posts->have_posts()):
         $posts->the_post(); ?>
 
     <div class="col-md-3">
