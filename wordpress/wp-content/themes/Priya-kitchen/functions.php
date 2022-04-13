@@ -6,8 +6,8 @@ register_nav_menus( [ 'primary' => __( 'Primary Menu' ) ] );
 
 function custom_style()
 {
-	 wp_enqueue_style('custom-style', get_stylesheet_uri() , array(), );
-	 wp_enqueue_style('custom-css-style', get_stylesheet_directory_uri() . '/css/custom.css', array(),);
+	 wp_enqueue_style('custom-style', get_stylesheet_uri());
+	 wp_enqueue_style('custom-css-style', get_stylesheet_directory_uri() . '/css/custom.css');
 }
 add_action('wp_enqueue_scripts', 'custom_style');
 
@@ -21,4 +21,4 @@ function slider() {
 }
 add_action('wp_enqueue_scripts', 'slider');
 
-
+require get_template_directory().'/inc/categoryimage/categoryimage.php';
