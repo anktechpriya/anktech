@@ -44,13 +44,20 @@ get_header();
       <div class="row">
         <?php
         $categories = get_categories();
+       
           foreach($categories as $category) {
-           echo '<div class="col-md-3"><a href="' . get_category_link($category->term_id) . '">' . $category->name . '</a></div>';
+            $image_id = get_term_meta ( $category->term_id, 'image_id', true );
+            ?> <div class="col-md-3"> <?php
+            echo '<a href="'. get_category_link($category->term_id) . '">' . wp_get_attachment_image ( $image_id, 'thumbnail' ) . '</a>';
+            
+            echo '<a href="'. get_category_link($category->term_id) . '">' . $category->name . '</a>';
+            ?></div> <?php
           }
+          
         ?>
       </div>
     </div>
-    
+
 <!-- section of browse by category ends -->
 
     <div>
