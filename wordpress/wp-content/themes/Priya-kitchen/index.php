@@ -1,41 +1,36 @@
 <?php
 get_header();
+?>
 
-if (have_posts()):
-    while (have_posts()):
-        the_post(); ?>
-		 <article class="post">
-        <h2><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h2>
-		<p class="post-meta"><?php the_time('F jS, Y'); ?> | <a
-                        href="<?php echo get_author_posts_url(get_the_author_meta('ID') , get_the_author_meta('user_nicename')); ?>"><?php the_author(); ?></a>
-                | <?php
-        $categories = get_the_category();
-        $comma = ', ';
-        $output = '';
+<h2><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h2>
+    <div class="container">
+        <?php echo category_description( get_category_by_slug( 'category-slug' )->term_id ); ?>
+    </div>
+      <div class="container">
+        <div class="row"> 
+<?php
 
-        if ($categories)
-        {
-            foreach ($categories as $category)
-            {
-                $output .= '<a href="' . get_category_link($category->term_id) . '">' . $category->cat_name . '</a>' . $comma;
-            }
-            echo trim($output, $comma);
-        } ?>
-            </p>
-			<?php the_post_thumbnail(); ?>
-			
-			<?php the_content(); ?>
-			<!--<button id="post-btn"> Read More </button>-->
-			<div id="post-container" ></div>
-		</article>
+
+if ( have_posts()):
+    while ( have_posts()):
+         the_post(); ?>
 		
+    <div class="col-lg-4 pl-2 pr-2 latest-recipes_content">
+        <a href = "<?php echo get_the_permalink(get_the_ID()); ?>" > <?php the_post_thumbnail('full'); ?></a>
+            <div class="caption">
+        <h3> <a href = "<?php echo get_the_permalink(get_the_ID()); ?>" > <?php the_title(); ?></a></h3>
+            </div>
+    </div>
+			
+   
 	<?php
     endwhile;
-
+    
 else:
     echo '<p>There are no posts!</p>';
 
-endif;
-get_footer();
+endif; ?>
+</div>
+</div>
 
-?>
+<?php get_footer(); ?>
