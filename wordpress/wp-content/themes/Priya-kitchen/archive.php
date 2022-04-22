@@ -1,72 +1,151 @@
 <?php
 get_header();
 ?>
-
-<h2><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h2>
+<div class="breadcrumb"><?php get_breadcrumb(); ?></div>
+<!-- Start food-story section -->
+<section class="food-story">
     <div class="container">
-        <?php echo category_description( get_category_by_slug( 'category-slug' )->term_id ); ?>
-    </div>
-      <div class="container">
-        <div class="row"> 
-<?php
+        <div class="food-story_left">
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Start main course section -->
+                    <div class="main-course">
+                        <h2><?php the_title() ?></h2>
+                        <div class="row mb-5">
+                            <?php
 
-if ( have_posts()):
-    
-    while ( have_posts()):
-         the_post(); ?>
-		
-    <div class="col-lg-4 pl-2 pr-2 latest-recipes_content">
-        <a href = "<?php echo get_the_permalink(get_the_ID()); ?>" > <?php the_post_thumbnail('full'); ?></a>
-            <div class="caption">
-        <h3> <a href = "<?php echo get_the_permalink(get_the_ID()); ?>" > <?php the_title(); ?></a></h3>
+                            if (have_posts()) :
+                                while (have_posts()) :
+                                    the_post(); ?>
+                                    <div class="col-lg-4 common_class">
+                                        <a href="<?php echo get_the_permalink(get_the_ID()); ?>"> <?php the_post_thumbnail('full'); ?></a>
+                                        <div class="caption">
+                                            <h3> <a href = "<?php echo get_the_permalink(get_the_ID()); ?>" > <?php the_title(); ?></a></h3>
+                                        </div>
+                                        
+                                    </div>
+                            <?php
+                                endwhile;
+                            endif; ?>
+                        </div>
+                    </div>
+                    <!-- End main course section -->
+
+                    <div>
+   
+                        <?php
+                        $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+                        
+                        $args = array(
+                            'post_type'=>'post',
+                            'paged' => $paged
+                        );
+                        
+                        $posts = new WP_Query( $args );
+                        if ( $posts->have_posts() ) {
+                            while ( $posts->have_posts() ) : $posts->the_post();
+                                    
+                            endwhile;
+                        
+                            $total_pages = $posts->max_num_pages;
+                        
+                            if ($total_pages > 1){
+                        
+                                $current_page = max(1, get_query_var('paged'));
+                        
+                                echo paginate_links(array(
+                                    'base' => get_pagenum_link(1) . '%_%',
+                                    'format' => 'page/%#%',
+                                    'current' => $current_page,
+                                    'total' => $total_pages,
+                                    'prev_text'    => __('< Previous'),
+                                    'next_text'    => __('Next >'),
+                                ));
+                            }    
+                        }
+                        ?>
+                        </div>
+                </div>
+
+                
+                <!-- End left section -->
+
+                <!-- Start right section -->
+                <div class="col-lg-4">
+                    <!-- Start persion details section -->
+                    <div class="row">
+                        <div class="col-lg-12 right_content">
+                            <div class="right_image">
+                                <img src="<?php echo get_template_directory_uri(); ?>/images/mobile-top.jpg" alt="mobile-top">
+                            </div>
+                            <p class="text-center"><strong>I am rakhi</strong> the cook, writer and photographer
+                                behind this little
+                                blog. I’ve grown up in the kitchen along side my mum and grandmothers and
+                                conversations in my family are always about the next meal. I’ve picked up their love
+                                for food along the way, and with this blog, I share my food story with you.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- End persion details section -->
+
+                    <!-- Start top recipes section -->
+                    <div class="top-recipes">
+                        <h2 class="mb-4">Top Recipes</h2>
+                        <div class="row mb-5">
+                            <?php
+                            $args = array(
+                                'category_name' => 'chicken'
+                            );
+
+                            $posts = new WP_Query($args);
+                            if ($posts->have_posts()) : ?>
+                                <?php while ($posts->have_posts()) :
+                                    $posts->the_post(); ?>
+                                    <div class="col-lg-6 common_class">
+                                        <a href="<?php echo get_the_permalink(get_the_ID()); ?>"> <?php the_post_thumbnail('thumbnail'); ?></a>
+                                        <div class="caption">
+                                            <h3> <a href="<?php echo get_the_permalink(get_the_ID()); ?>"> <?php the_title(); ?></a></h3>
+                                        </div>
+                                        </a>
+                                    </div>
+                            <?php
+                                endwhile;
+                            endif; ?>
+                        </div>
+                    </div>
+                    <!-- End top recipes section -->
+                    <!-- Start christmas favourites sectoin -->
+                    <div class="christmas-favourites">
+                        <h2 class="mb-4">Christmas Favourites</h2>
+                        <div class="row mb-5">
+                            <?php
+                            $args = array(
+                                'category_name' => 'pulao'
+                            );
+
+                            $posts = new WP_Query($args);
+                            if ($posts->have_posts()) : ?>
+                                <?php while ($posts->have_posts()) :
+                                    $posts->the_post(); ?>
+                                    <div class="col-lg-6 common_class">
+                                        <a href="<?php echo get_the_permalink(get_the_ID()); ?>"> <?php the_post_thumbnail('thumbnail'); ?></a>
+                                        <div class="caption">
+                                            <h3> <a href="<?php echo get_the_permalink(get_the_ID()); ?>"> <?php the_title(); ?></a></h3>
+                                        </div>
+                                        </a>
+                                    </div>
+                            <?php
+                                endwhile;
+                            endif; ?>
+                        </div>
+                    </div>
+                    <!-- End christmas favourites sectoin -->
+                    <!-- End right section -->
+                </div>
             </div>
+        </div>
     </div>
-			
-   
-	<?php
-    endwhile;
-else:
-    echo '<p>There are no posts!</p>';
-
-endif; ?>
-</div>
-</div>
-
-<div>
-   
-<?php
-$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-
-$args = array(
-    'post_type'=>'post',
-    'posts_per_page' => 2,
-    'paged' => $paged,
-);
-
-$loop = new WP_Query( $args );
-if ( $loop->have_posts() ) {
-    while ( $loop->have_posts() ) : $loop->the_post();
-    get_template_part( 'template-parts/content', get_post_type() );       
-    endwhile;
-
-    $total_pages = $loop->max_num_pages;
-
-    if ($total_pages > 1){
-
-        $current_page = max(1, get_query_var('paged'));
-
-        echo paginate_links(array(
-            'base' => get_pagenum_link(1) . '%_%',
-            'format' => 'page/%#%',
-            'current' => $current_page,
-            'total' => $total_pages,
-            'prev_text'    => __('< Previous'),
-            'next_text'    => __('Next >'),
-        ));
-    }    
-}
-wp_reset_postdata();
-?>
-</div>
+</section>
+<!-- End food story section -->
 
 <?php get_footer(); ?>
