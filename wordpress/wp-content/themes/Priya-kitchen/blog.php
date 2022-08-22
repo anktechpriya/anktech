@@ -110,7 +110,6 @@ get_header(); ?>
             </div>
         </div>
     </section>
-    <h2>hello world</h2>
     <!-- All recipes section end -->
 
 <?php get_footer(); ?>
