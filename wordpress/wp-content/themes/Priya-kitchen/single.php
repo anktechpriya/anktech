@@ -18,7 +18,7 @@ get_header();
                                 while ( have_posts()):
                                     the_post(); ?>
                 <div class="col-lg-12 common_class">
-                 <a href = "<?php echo get_the_permalink(get_the_ID()); ?>" > <?php the_post_thumbnail('1200*1200'); ?></a>
+                 <a href = "<?php echo get_the_permalink(get_the_ID()); ?>" > <?php the_post_thumbnail(''); ?></a>
                 <p> <?php the_content(); ?></p>
                 </a>
                 </div>

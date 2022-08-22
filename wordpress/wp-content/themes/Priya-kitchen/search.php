@@ -30,7 +30,7 @@ if ( have_posts() ) :
 				} ?>
             </p>
             <p>
-				<?php echo get_the_excerpt() ?>
+			<?php echo get_the_excerpt() ?>
                 <a href="<?php the_permalink() ?>">Read more &raquo</a>
             </p>
         </article>

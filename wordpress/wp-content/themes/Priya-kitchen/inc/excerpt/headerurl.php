@@ -5,8 +5,3 @@ function logo_url($url){
 }
 add_filter("login_headerurl","logo_url");
 
-//changed logo title
-function logo_title(){
-    return "priya kitchen";
-}
-add_filter("login_headertitle","logo_title");

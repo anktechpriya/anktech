@@ -4,7 +4,7 @@ get_header();
 
 <h2><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h2>
     <div class="container">
-        <?php echo category_description( get_category_by_slug( 'category-slug' )->term_id ); ?>
+        
     </div>
       <div class="container">
         <div class="row"> 
