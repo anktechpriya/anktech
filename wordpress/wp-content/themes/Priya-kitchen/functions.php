@@ -54,3 +54,52 @@ function my_register_sidebars()
 	);
 }
 add_action('widgets_init', 'my_register_sidebars');
+
+function custom_meta_box_markup($object)
+{
+    wp_nonce_field(basename(__FILE__), "meta-box-nonce");
+
+    ?>
+        <div>
+            <label for="meta-box-description">Message</label>
+            <input name="meta-box-description" type="text" value="<?php echo get_post_meta($object->ID, "meta-box-description", true); ?>">
+            <br>
+           
+        </div>
+    <?php  
+}
+
+function add_custom_meta_box()
+{
+    add_meta_box("demo-meta-box", "Custom Meta Box", "custom_meta_box_markup", "post", "side", "high", null);
+}
+
+add_action("add_meta_boxes", "add_custom_meta_box");
+
+function save_custom_meta_box($post_id, $post, $update)
+{
+    if (!isset($_POST["meta-box-nonce"]) || !wp_verify_nonce($_POST["meta-box-nonce"], basename(__FILE__)))
+        return $post_id;
+
+    if(!current_user_can("edit_post", $post_id))
+        return $post_id;
+
+    if(defined("DOING_AUTOSAVE") && DOING_AUTOSAVE)
+        return $post_id;
+
+    $slug = "post";
+    if($slug != $post->post_type)
+        return $post_id;
+
+    $meta_box_text_value = "";
+    if(isset($_POST["meta-box-description"]))
+    {
+        $meta_box_text_value = $_POST["meta-box-description"];
+    }   
+    update_post_meta($post_id, "meta-box-description", $meta_box_text_value);
+    
+    
+}
+
+add_action("save_post", "save_custom_meta_box", 10, 3);
+

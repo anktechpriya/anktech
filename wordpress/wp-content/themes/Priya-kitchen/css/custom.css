@@ -14,7 +14,7 @@
 }
 
 #s {
-    height: 18px;
+     height: 18px; 
     padding: 5px 8px;
     font-size: 15px;
     line-height: 1.1;
@@ -70,3 +70,17 @@ ul {
     transition: 0.3s;
 }
 
+div#block-11 {
+    max-width: 75%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+li.about_us {
+    display: block;
+    margin-bottom: 25px;
+}
+
+li.social_icons {
+    display: inline-block;
+}
